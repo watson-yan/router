@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+<body>
+  <a href="#/a">pageA</a>
+  <a href="#/b">pageB</a>
+
+  <div id="app">
+  </div>
+
+  <script>
+  // import pageA from './template/a.html'
+  // import pageB from './template/b.html'
+
+  window.onload = function() {
+    var router = new Router()
+    router.when('/a', './template/a.html')
+        .when('/b', './template/b.html')
+        .otherwise('/a')
+
+    router.change()
+
+    window.addEventListener('popstate', function() {
+      router.change()
+    })
+  }
+
+  function Router() {
+    this.routers = {}
+  }
+
+  Router.prototype = {
+    
+    when(path, route) {
+      this.routers[path] = route
+      return this
+    },
+    otherwise(path) {
+      this.currentPath = path
+    },
+    change() {
+      if (!location.hash) {
+        history.pushState(null, '', `${location.href}#${this.currentPath}`)
+      }
+
+      this.lastPath = this.currentPath
+      this.currentPath = location.hash.substring(1)
+      // 路由到相同的hash值
+      if (this.currentPath === this.lastPath) {
+        return
+      }
+      //路由到不同的hash值
+      console.warn(`this.lastPath: ${this.lastPath}`)
+      console.warn(`this.currentPath: ${this.currentPath}`)
+      console.warn(this.routers)
+      console.warn(`template: ${this.routers[this.currentPath]}`)
+      document.querySelector('#app').innerHTML = this.routers[this.currentPath]
+    }
+  }
+  </script>
+</body>
+</html>

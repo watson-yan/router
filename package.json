@@ -1,0 +1,22 @@
+{
+  "name": "router",
+  "version": "1.0.0",
+  "description": "前端单页面程序路由的实现",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/watson-yan/router.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/watson-yan/router/issues"
+  },
+  "homepage": "https://github.com/watson-yan/router#readme",
+  "devDependencies": {
+    "rollup": "^0.43.0"
+  }
+}
