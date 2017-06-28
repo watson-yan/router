@@ -9,14 +9,21 @@
 <body>
   <a href="#/a">pageA</a>
   <a href="#/b">pageB</a>
+  <a href="#/c">pageB</a>
+  <div>
+    <button onclick="pushUrl('/a')">pushState-pageA</button>
+    <button onclick="pushUrl('/b')">pushState-pageB</button>
+    <button onclick="pushUrl('/c')">pushState-pageC</button>
+  </div>
 
   <div id="app">
   </div>
 
-  <script>
-  // import pageA from './template/a.html'
-  // import pageB from './template/b.html'
+  <script src="./bundle.js"></script>
+  <script type="text/javascript">
 
+  </script>
+  <!--<script>
   window.onload = function() {
     var router = new Router()
     router.when('/a', './template/a.html')
@@ -62,6 +69,6 @@
       document.querySelector('#app').innerHTML = this.routers[this.currentPath]
     }
   }
-  </script>
+  </script>-->
 </body>
 </html>
