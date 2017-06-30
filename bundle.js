@@ -22,7 +22,7 @@ class Router {
   }
   change() {
     const hash = location.hash.split('#')[1];
-    const host = location.host;
+    // const host = location.host
     // history.pushState(null, '', hash)
     this.go(hash);
     
@@ -49,15 +49,32 @@ const router = [
 
 window.onload = () => {
   const router$$1 = new Router(router);
+  // hash模式
   if ('onhashchange' in window) {
     window.addEventListener('hashchange', () => {
       router$$1.change();
     });
   }
-  +function pushUrl(url) {
-    history.pushState(null, 'title', url);
-    router$$1.go(url);
-  };
+  // history 模式
+  if(window.history && window.history.pushState) {
+    if (location.href !== location.host) {
+      const linkBtns = document.querySelectorAll('.router-link');
+      linkBtns.forEach((ele) => {
+        ele.addEventListener('click', () => {
+          const toUrl = ele.dataset.url;
+          history.pushState(null, '', toUrl);
+          router$$1.go(toUrl);
+        });
+      });
+    }
+    // window.addEventListener('popstate', () => {alert('1')})
+    window.addEventListener('popstate', () => {
+      console.warn('popstate');
+      const url = location.href.replace(`${location.protocol}//${location.host}`, '');
+      // console.log(url)
+      router$$1.go(url);
+    });
+  }
 };
 
 })));

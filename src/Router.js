@@ -16,8 +16,6 @@ export default class Router {
   }
   change() {
     const hash = location.hash.split('#')[1]
-    const host = location.host
-    // history.pushState(null, '', hash)
     this.go(hash)
     
   }
